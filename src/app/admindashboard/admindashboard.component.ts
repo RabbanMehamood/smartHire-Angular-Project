@@ -37,6 +37,7 @@ export class AdmindashboardComponent implements OnInit  {
   selectedRole  : string ='';
   selectedDepartment: string = '';
   submitted: boolean = false;
+  today: string = new Date().toISOString().split('T')[0];
   roles: Role[]=[
     { "name": "Employee" },
     { "name": "Executive" },

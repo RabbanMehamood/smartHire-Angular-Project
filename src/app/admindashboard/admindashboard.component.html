@@ -113,140 +113,116 @@
 
 
 <!-- //add-employee Modal p-dialog -->
-
 <p-dialog
-header="Add Employee"
-[(visible)]="visible"
-[modal]="true"
-[breakpoints]="{ '1199px': '75vw', '575px': '85vw' }"
-[style]="{ width: '55rem' }"
+  header="Add Employee"
+  [(visible)]="visible"
+  [modal]="true"
+  [breakpoints]="{ '1199px': '75vw', '575px': '85vw' }"
+  [style]="{ width: '25rem' }"
 >
-<form [formGroup]="employeeForm" class="grid gap-2">
-  <div class="grid col-12 md:col-6">
-    <label class="col-12" for="name">Employee Name:</label>
-    <input pInputText class="col-12" formControlName="name" />
-    <div *ngIf="employeeForm.get('name')?.invalid && submitted">
-      <small
-        *ngIf="employeeForm.get('name')?.errors?.['required']"
-        style="color: red"
-        >*Employee Name is required.</small
-      >
-      <small
-        *ngIf="employeeForm.get('name')?.errors?.['lettersOnly']"
-        style="color: red"
-        s
-        >Only letters allowed.</small
-      >
-      </div>
-  </div>
+  <form [formGroup]="employeeForm" class="p-fluid">
+    
+    <!-- Name -->
+    <div class="p-field mb-3">
+      <label for="name">Employee Name</label>
+      <input id="name" type="text" pInputText formControlName="name" />
+      <small *ngIf="employeeForm.get('name')?.hasError('required') && submitted" style="color: red">
+        *Employee Name is required.
+      </small>
+      <small *ngIf="employeeForm.get('name')?.hasError('lettersOnly') && submitted" style="color: red">
+        Only letters allowed.
+      </small>
+    </div>
 
-  <div class="grid col-12 md:col-6">
-    <label class="col-12" for="email">Email:</label>
-    <input pInputText class="col-12" formControlName="email" />
-    <div *ngIf="employeeForm.get('email')?.invalid && submitted">
-      <small
-        *ngIf="employeeForm.get('email')?.errors?.['required']"
-        style="color: red"
-        >*Email is required.</small
-      >
-      <small
-      *ngIf="employeeForm.get('email')?.errors?.['email']"
-      style="color: red"
-      >Must be in email format</small
-    >
-      </div>
-  </div>
+    <!-- Email -->
+    <div class="p-field mb-3">
+      <label for="email">Email</label>
+      <input id="email" type="email" pInputText formControlName="email" />
+      <small *ngIf="employeeForm.get('email')?.hasError('required') && submitted" style="color: red">
+        *Email is required.
+      </small>
+      <small *ngIf="employeeForm.get('email')?.hasError('email') && submitted" style="color: red">
+        Must be in valid email format.
+      </small>
+    </div>
 
-  <div class="grid col-12 md:col-6">
-    <label class="col-12">Department:</label>
-    <p-dropdown
-      class="col-12"
-      [options]="departmentsArray"
-      formControlName="department"
-      optionLabel="name"
-      placeholder="Select Department"
-    ></p-dropdown>
-    <div *ngIf="employeeForm.get('department')?.invalid && submitted">
-      <small
-        *ngIf="employeeForm.get('department')?.errors?.['required']"
-        style="color: red"
-        >*Please select employee department.</small
-      >
-      </div>
-  </div>
+    <!-- Department -->
+    <div class="p-field mb-3">
+      <label for="department">Department</label>
+      <p-dropdown
+        inputId="department"
+        [options]="departmentsArray"
+        formControlName="department"
+        optionLabel="name"
+        placeholder="Select Department"
+      ></p-dropdown>
+      <small *ngIf="employeeForm.get('department')?.hasError('required') && submitted" style="color: red">
+        *Please select a department.
+      </small>
+    </div>
 
-  <div class="grid col-12 md:col-6">
-    <label class="col-12">Role:</label>
-    <p-dropdown
-      class="col-12"
-      [options]="roles"
-      formControlName="role"
-      optionLabel="name"
-      placeholder="Select Role"
-      (onChange)="getRole($event)"
-    ></p-dropdown>
-    <div *ngIf="employeeForm.get('role')?.invalid && submitted">
-      <small
-        *ngIf="employeeForm.get('role')?.errors?.['required']"
-        style="color: red"
-        >*Please select the role.</small
-      >
-      </div>
-  </div>
+    <!-- Role -->
+    <div class="p-field mb-3">
+      <label for="role">Role</label>
+      <p-dropdown
+        inputId="role"
+        [options]="roles"
+        formControlName="role"
+        optionLabel="name"
+        placeholder="Select Role"
+        (onChange)="getRole($event)"
+      ></p-dropdown>
+      <small *ngIf="employeeForm.get('role')?.hasError('required') && submitted" style="color: red">
+        *Please select a role.
+      </small>
+    </div>
 
-  <div class="grid col-12 md:col-6">
-    <label class="col-12">Salary:</label>
-    <input pInputText type="number" class="col-12" formControlName="salary" />
-    <div *ngIf="employeeForm.get('salary')?.invalid && submitted">
-      <small
-        *ngIf="employeeForm.get('salary')?.errors?.['required']"
-        style="color: red"
-        >*Please enter the salary.</small
-      >
-      </div>
-  </div>
+    <!-- Salary -->
+    <div class="p-field mb-3">
+      <label for="salary">Salary</label>
+      <input id="salary" type="number" pInputText formControlName="salary" />
+      <small *ngIf="employeeForm.get('salary')?.hasError('required') && submitted" style="color: red">
+        *Salary is required.
+      </small>
+    </div>
 
-  <div class="grid col-12 md:col-6" *ngIf="selectedRole === 'Manager'">
-    <label class="col-12">Bonus:</label>
-    <input pInputText type="number" class="col-12" formControlName="bonus" />
-    <div *ngIf="employeeForm.get('bonus')?.invalid && submitted">
-      <small
-        *ngIf="employeeForm.get('bonus')?.errors?.['required']"
-        style="color: red"
-        >*Please enter bonus for the Manager.</small
-      >
-      </div>
-  </div>
+    <!-- Bonus (only if Manager) -->
+    <div class="p-field mb-3" *ngIf="selectedRole === 'Manager'">
+      <label for="bonus">Bonus</label>
+      <input id="bonus" type="number" pInputText formControlName="bonus" />
+      <small *ngIf="employeeForm.get('bonus')?.hasError('required') && submitted" style="color: red">
+        *Bonus is required for Manager role.
+      </small>
+    </div>
 
-  <div class="grid col-12 md:col-6">
-    <label class="col-12">Joined Date:</label>
-    <input type="date" class="col-12" formControlName="joinedDate" />
-    <!-- <p-floatLabel class="col-12">
-      <p-calendar formControlName="joinedDate"  />
-      <label for="joinedDate">Joining Date</label>
-  </p-floatLabel> -->
-    <div *ngIf="employeeForm.get('joinedDate')?.invalid && submitted">
-      <small
-        *ngIf="employeeForm.get('joinedDate')?.errors?.['required']"
-        style="color: red"
-        >*Please select employee department.</small
-      >
-      </div>
-  </div>
-  <div class="grid justify-content-end align-content-end align-items-end col-12 md:col-6 ">
-    <div class="flex justify-content-end align-content-end align-items-end gap-2"> <p-button
-      label="Cancel"
-      (onClick)="visible = false"
-      severity="info"
-    ></p-button>
-    <p-button
-      label="Add"
-      severity="success"
-      (onClick)="addEmployee()"
-    ></p-button></div>
-</div>
-</form>
+    <!-- Joined Date -->
+    <div class="p-field mb-3">
+      <label for="joinedDate">Joined Date</label>
+      <input id="joinedDate" type="date" pInputText formControlName="joinedDate" [max]="today" />
+      <small *ngIf="employeeForm.get('joinedDate')?.hasError('required') && submitted" style="color: red">
+        *Please select the joining date.
+      </small>
+    </div>
+
+    <!-- Buttons -->
+    <div class="flex justify-content-end gap-2 mb-3">
+      <p-button
+        label="Cancel"
+        icon="pi pi-times"
+        class="p-button-text"
+        (onClick)="visible = false && employeeForm.reset()"
+      ></p-button>
+
+      <p-button
+        label="Add"
+        icon="pi pi-check"
+        (onClick)="addEmployee()"
+        severity="success"
+        ></p-button>
+    </div>
+  </form>
 </p-dialog>
+
 <p-toast position="bottom-center" key="addEmployeeToast" />
 
 

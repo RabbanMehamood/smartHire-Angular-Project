@@ -102,7 +102,8 @@
 <p-dialog header="Edit Employee"
           [(visible)]="showEditDialog"
           [modal]="true"
-          [style]="{ width: '450px' }">
+          [style]="{ width: '450px' }"
+          >
 
   <form #editForm="ngForm" (ngSubmit)="onEditSubmit(editForm)">
     <div class="p-fluid">
@@ -169,14 +170,14 @@
 
       <div class="p-field mb-3">
         <label for="joinedDate">Joined Date</label>
-        <input id="joinedDate" type="date" pInputText [(ngModel)]="selectedEmployee.joinedDate" name="joinedDate" required #joinedDate="ngModel" />
+        <input id="joinedDate" [max]="today" type="date" pInputText [(ngModel)]="selectedEmployee.joinedDate" name="joinedDate" required #joinedDate="ngModel"  />
         <small *ngIf="role.errors?.['required'] && role.touched" style="color: red">*Joining Date Cannot be empty.</small>
 
       </div>
 
     </div>
 
-   <div class="p-field mb-3 gap-2 p-flex p-jc-end">
+   <div class="flex justify-content-end gap-2 mb-3 ">
       <p-button label="Cancel" icon="pi pi-times" (onClick)="showEditDialog = false" class="p-button-text"></p-button>
       <p-button type="submit" label="Save" icon="pi pi-check" [disabled]="editForm.invalid"></p-button>
     </div>

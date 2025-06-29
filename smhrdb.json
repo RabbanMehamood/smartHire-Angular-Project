@@ -228,6 +228,16 @@
       "salary": 54000,
       "bonus": null,
       "joinedDate": "2025-06-19"
+    },
+    {
+      "id": "22",
+      "name": "Rakesh Khanna",
+      "email": "khanna@gmail.com",
+      "department": "HR",
+      "role": "Manager",
+      "salary": 35000,
+      "bonus": 1000,
+      "joinedDate": "2025-06-26"
     }
   ],
   "departments": [

@@ -22,7 +22,7 @@ export class EmployeeTableComponent implements OnInit {
   initialValue: Employee[];
   loading: boolean = true;
   searchValue: string | undefined;
-
+  today: string;
   //edit properties
   showEditDialog = false;
 selectedEmployee: any = {};
@@ -59,6 +59,7 @@ departments = [
   constructor(private empService: EmployeeserviceService, private router:Router,private messageService:MessageService, private confirmationService:ConfirmationService) {}
 
   ngOnInit(): void {
+    this.today = new Date().toISOString().split('T')[0];
     this.empService.getUsers().subscribe({
       next: (res: any) => {
         this.loading = false;
