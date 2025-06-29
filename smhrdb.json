@@ -39,7 +39,8 @@
       "salary": 70000,
       "joinedDate": "2022-09-15",
       "department": "Finance",
-      "role": "Manager"
+      "role": "Manager",
+      "bonus": 1000
     },
     {
       "id": "2",

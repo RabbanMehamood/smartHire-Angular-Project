@@ -162,7 +162,7 @@
 
       <div class="p-field mb-3" *ngIf="selectedEmployee.role?.name === 'Manager'">
         <label for="bonus">Bonus</label>
-        <input id="bonus" type="number" pInputText [(ngModel)]="selectedEmployee.bonus" name="bonus" #bonus="ngModel"/>
+        <input id="bonus" type="number" pInputText [(ngModel)]="selectedEmployee.bonus" name="bonus" #bonus="ngModel" required/>
         <small *ngIf="bonus.errors?.['required'] && bonus.touched" style="color: red">*Bonus cannot be empty for Manager Role.</small>
 
       </div>
