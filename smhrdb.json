@@ -1,0 +1,267 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "username": "admin",
+      "password": "admin123",
+      "role": "admin"
+    },
+    {
+      "id": "2",
+      "username": "john",
+      "password": "john123",
+      "role": "user"
+    },
+    {
+      "id": "3",
+      "username": "clara",
+      "password": "clara2023",
+      "role": "user"
+    },
+    {
+      "id": "4",
+      "username": "eva",
+      "password": "evapass",
+      "role": "user"
+    },
+    {
+      "id": "5",
+      "username": "david",
+      "password": "davidpwd",
+      "role": "admin"
+    }
+  ],
+  "employees": [
+    {
+      "id": "1",
+      "name": "Bob Smith",
+      "email": "bob@smarthire.com",
+      "salary": 70000,
+      "joinedDate": "2022-09-15",
+      "department": "Finance",
+      "role": "Manager"
+    },
+    {
+      "id": "2",
+      "name": "Clara Martinez",
+      "email": "clara@smarthire.com",
+      "salary": 85000,
+      "bonus": 5000,
+      "joinedDate": "2021-06-21",
+      "role": "Manager",
+      "department": "Marketing"
+    },
+    {
+      "id": "3",
+      "name": "David Kim",
+      "email": "david@smarthire.com",
+      "department": "Finance",
+      "role": "Employee",
+      "salary": 90000,
+      "joinedDate": "2020-03-10"
+    },
+    {
+      "id": "4",
+      "name": "Eva Wang",
+      "email": "eva@smarthire.com",
+      "salary": 110000,
+      "bonus": 12000,
+      "joinedDate": "2021-11-03",
+      "department": "HR",
+      "role": "Manager"
+    },
+    {
+      "id": "5",
+      "name": "Felix Green",
+      "email": "felix@smarthire.com",
+      "salary": 78000,
+      "joinedDate": "2021-02-12",
+      "bonus": 5200,
+      "department": "Marketing",
+      "role": "UX Designer"
+    },
+    {
+      "id": "6",
+      "name": "Grace Lee",
+      "email": "grace@smarthire.com",
+      "department": "HR",
+      "salary": 96000,
+      "joinedDate": "2023-04-20",
+      "role": "Sales Associate"
+    },
+    {
+      "id": "7",
+      "name": "Henry Adams",
+      "email": "henry@smarthire.com",
+      "department": "Finance",
+      "role": "Manager",
+      "salary": 115000,
+      "bonus": 8000,
+      "joinedDate": "2019-07-25"
+    },
+    {
+      "id": "8",
+      "name": "Isla Brown",
+      "email": "isla@smarthire.com",
+      "department": "HR",
+      "role": "Recruiter",
+      "salary": 65000,
+      "joinedDate": "2022-05-30"
+    },
+    {
+      "id": "9",
+      "name": "Jake Turner",
+      "email": "jake@smarthire.com",
+      "department": "Marketing",
+      "role": "Content Creator",
+      "salary": 72000,
+      "joinedDate": "2020-10-14"
+    },
+    {
+      "id": "10",
+      "name": "Karen Hill",
+      "email": "karen@smarthire.com",
+      "department": "Engineering",
+      "role": "QA Engineer",
+      "salary": 88000,
+      "joinedDate": "2021-01-07"
+    },
+    {
+      "id": "11",
+      "name": "Leo James",
+      "email": "leo@smarthire.com",
+      "department": "Sales",
+      "role": "Executive",
+      "salary": 120000,
+      "joinedDate": "2023-03-02"
+    },
+    {
+      "id": "12",
+      "name": "Maya Patel",
+      "email": "maya@smarthire.com",
+      "department": "Finance",
+      "role": "Accountant",
+      "salary": 93000,
+      "joinedDate": "2020-12-18"
+    },
+    {
+      "id": "13",
+      "name": "Nathan Chen",
+      "email": "nathan@smarthire.com",
+      "department": "Engineering",
+      "role": "Intern",
+      "salary": 40000,
+      "joinedDate": "2024-05-01"
+    },
+    {
+      "id": "14",
+      "name": "Olivia Davis",
+      "email": "olivia@smarthire.com",
+      "department": "Marketing",
+      "role": "Brand Manager",
+      "salary": 98000,
+      "joinedDate": "2021-09-09"
+    },
+    {
+      "id": "15",
+      "name": "Peter Zhang",
+      "email": "peter@smarthire.com",
+      "department": "Engineering",
+      "role": "Architect",
+      "salary": 130000,
+      "bonus": 20000,
+      "joinedDate": "2018-04-15"
+    },
+    {
+      "id": "16",
+      "name": "Queenie Lin",
+      "email": "queenie@smarthire.com",
+      "department": "HR",
+      "role": "HR Manager",
+      "salary": 95000,
+      "joinedDate": "2019-11-20"
+    },
+    {
+      "id": "17",
+      "name": "Ryan White",
+      "email": "ryan@smarthire.com",
+      "department": "Sales",
+      "role": "Sales Executive",
+      "salary": 86000,
+      "joinedDate": "2022-07-08"
+    },
+    {
+      "id": "18",
+      "name": "Sophie King",
+      "email": "sophie@smarthire.com",
+      "department": "Design",
+      "role": "UX Designer",
+      "salary": 79000,
+      "joinedDate": "2020-02-19"
+    },
+    {
+      "id": "19",
+      "name": "Tom Reed",
+      "email": "tom@smarthire.com",
+      "department": "Finance",
+      "role": "Recruiter",
+      "salary": 105000,
+      "bonus": 10000,
+      "joinedDate": "2021-08-11"
+    },
+    {
+      "id": "20",
+      "name": "Dakota Johnson",
+      "email": "Dacota@smarthire.com",
+      "department": "HR",
+      "role": "Intern",
+      "salary": 120000,
+      "joinedDate": "2023-01-10"
+    },
+    {
+      "id": "21",
+      "name": "Travis Glyenhaal",
+      "email": "travis@smarthire.com",
+      "department": "Sales",
+      "role": "Analyst",
+      "salary": 54000,
+      "bonus": null,
+      "joinedDate": "2025-06-19"
+    }
+  ],
+  "departments": [
+    {
+      "id": "1",
+      "name": "Engineering"
+    },
+    {
+      "id": "2",
+      "name": "HR"
+    },
+    {
+      "id": "3",
+      "name": "Marketing"
+    },
+    {
+      "id": "4",
+      "name": "Finance"
+    },
+    {
+      "id": "5",
+      "name": "Sales"
+    },
+    {
+      "id": "6",
+      "name": "Design"
+    },
+    {
+      "id": "61c3"
+    },
+    {
+      "id": "6510"
+    },
+    {
+      "id": "ce68"
+    }
+  ]
+}

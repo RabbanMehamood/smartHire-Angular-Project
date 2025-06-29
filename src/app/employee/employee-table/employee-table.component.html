@@ -1,0 +1,185 @@
+<app-header></app-header>
+<div class="grid back">
+  <div class="col-12">
+    <p-table
+      #dt
+      [value]="employeesObject | searchSortPipe:searchValue"
+      dataKey="id"
+      [rows]="10"
+      [rowsPerPageOptions]="[10, 25, 50]"
+      [loading]="loading"
+      [paginator]="true"
+      [tableStyle]="{ 'min-width': '75rem' }"
+    >
+      <ng-template pTemplate="caption">
+        <div class="flex">
+          <div class="mr-auto">  <p-button 
+            label="Back" 
+            icon="pi pi-arrow-left" 
+            [loading]="loading" 
+            [severity]="'contrast'"
+            (onClick)="backtodashboard()"
+            /></div>
+          <p-iconField iconPosition="left" class="ml-auto">
+            <p-inputIcon>
+              <i class="pi pi-search"></i>
+            </p-inputIcon>
+            <input
+              pInputText
+              type="text"
+              (input)="pipeSort($event)"
+              placeholder="Search keyword"
+            />
+          </p-iconField>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th style="width: 5%" class="cursor-pointer" >Id</th>
+          <th style="width: 15%" class="cursor-pointer" pSortableColumn="name">Name <p-sortIcon field="name" /></th>
+          <th style="width: 20%" class="cursor-pointer" pSortableColumn="email">Email <p-sortIcon field="email" /></th>
+          <th style="width: 15%" class="cursor-pointer" pSortableColumn="department">Department <p-sortIcon field="department" /></th>
+          <th style="width: 15%" class="cursor-pointer" pSortableColumn="role">Role <p-sortIcon field="role" /></th>
+          <th style="width: 10%" class="cursor-pointer" pSortableColumn="salary">Salary <p-sortIcon field="salary" /></th>
+          <th style="width: 10%" class="cursor-pointer" pSortableColumn="bonus">Bonus <p-sortIcon field="bonus" /></th>
+          <th style="width: 10%" class="cursor-pointer" pSortableColumn="joinedDate">Joined Date <p-sortIcon field="joinedDate" /></th>
+          <th style="width: 10%" >Edit</th>
+          <th style="width: 10%" >Delete</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-user>
+        <tr>
+          <td>{{user.id}}</td>
+          <td>
+            {{ user.name }}
+          </td>
+          <td>
+            <span class="ml-1 vertical-align-middle">
+              {{ user.email }}
+            </span>
+          </td>
+          <td>
+            <span class="ml-1 vertical-align-middle">
+              {{ user.department }}
+            </span>
+          </td>
+          <td>
+            <span>{{ user.role }}</span>
+          </td>
+          <td>
+            <span appSalaryHightlight>{{ user.salary  | currency : "USD" : "symbol" : "0.0-0" }}</span>
+          </td>
+          <td>
+            <span>{{ user.bonus }}</span>
+          </td>
+          <td>
+            <span>{{ user.joinedDate }}</span>
+          </td>
+          <td>
+           <span class="cursor-pointer" (click)="onEditClick(user)"> <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="M200-200h57l391-391-57-57-391 391v57Zm-80 80v-170l528-527q12-11 26.5-17t30.5-6q16 0 31 6t26 18l55 56q12 11 17.5 26t5.5 30q0 16-5.5 30.5T817-647L290-120H120Zm640-584-56-56 56 56Zm-141 85-28-29 57 57-29-28Z"/></svg>
+           </span>
+          </td>
+          <td>
+            <p-toast position="bottom-center"/>
+                <p-confirmPopup />
+            <span class="cursor-pointer" (click)="deleteUser($event, user.id)">
+            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"/></svg>
+          </span></td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="5">No customers found.</td>
+        </tr>
+      </ng-template>
+    
+    </p-table>
+  </div>
+</div>
+
+
+<!-- p-dialog for editing employee  -->
+<p-dialog header="Edit Employee"
+          [(visible)]="showEditDialog"
+          [modal]="true"
+          [style]="{ width: '450px' }">
+
+  <form #editForm="ngForm" (ngSubmit)="onEditSubmit(editForm)">
+    <div class="p-fluid">
+
+      <div class="p-field mb-3">
+        <label for="id">ID</label>
+        <input id="id" type="text" pInputText [(ngModel)]="selectedEmployee.id" name="id" disabled />
+      </div>
+
+      <div class="p-field mb-3">
+        <label for="name">Name</label>
+        <input id="name" type="text" pInputText [(ngModel)]="selectedEmployee.name" name="name" required disabled/>
+
+      </div>
+
+      <div class="p-field mb-3">
+        <label for="email">Email</label>
+        <input id="email" type="email" pInputText [(ngModel)]="selectedEmployee.email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"  #email="ngModel" required />
+        <small *ngIf="email.errors?.['required'] && email.touched" style="color: red">*Email is required.</small>
+        <small *ngIf="email.errors?.['pattern'] && email.touched" style="color: red">*Invalid email format.</small>
+     
+      </div>
+
+      <div class="p-field mb-3">
+        <label for="department">Department</label>
+        <p-dropdown
+          [options]="departments"
+          [(ngModel)]="selectedEmployee.department"
+          name="department"
+          optionLabel="name"
+          [placeholder]="selectedEmployee.department"
+          #department="ngModel"
+          required>
+        </p-dropdown>
+        <small *ngIf="department.errors?.['required'] && department.touched" style="color: red">*Select Department, dept is required.</small>
+      </div>
+
+      <div class="p-field mb-3">
+        <label for="role">Role</label>
+        <p-dropdown
+          [options]="roles"
+          [(ngModel)]="selectedEmployee.role"
+          name="role"
+          optionLabel="name"
+          [placeholder]="selectedEmployee.role"
+          #role="ngModel"
+          required>
+        </p-dropdown>
+        <small *ngIf="role.errors?.['required'] && role.touched" style="color: red">*Select Role, role is required.</small>
+      </div>
+
+      <div class="p-field mb-3">
+        <label for="salary">Salary</label>
+        <input id="salary" type="number" pInputText [(ngModel)]="selectedEmployee.salary" name="salary" #salary="ngModel" required />
+        <small *ngIf="salary.errors?.['required'] && salary.touched" style="color: red">*Salary Cannot be empty</small>
+      </div>
+
+      <div class="p-field mb-3" *ngIf="selectedEmployee.role?.name === 'Manager'">
+        <label for="bonus">Bonus</label>
+        <input id="bonus" type="number" pInputText [(ngModel)]="selectedEmployee.bonus" name="bonus" #bonus="ngModel"/>
+        <small *ngIf="bonus.errors?.['required'] && bonus.touched" style="color: red">*Bonus cannot be empty for Manager Role.</small>
+
+      </div>
+
+      <div class="p-field mb-3">
+        <label for="joinedDate">Joined Date</label>
+        <input id="joinedDate" type="date" pInputText [(ngModel)]="selectedEmployee.joinedDate" name="joinedDate" required #joinedDate="ngModel" />
+        <small *ngIf="role.errors?.['required'] && role.touched" style="color: red">*Joining Date Cannot be empty.</small>
+
+      </div>
+
+    </div>
+
+   <div class="p-field mb-3 gap-2 p-flex p-jc-end">
+      <p-button label="Cancel" icon="pi pi-times" (onClick)="showEditDialog = false" class="p-button-text"></p-button>
+      <p-button type="submit" label="Save" icon="pi pi-check" [disabled]="editForm.invalid"></p-button>
+    </div>
+  </form>
+</p-dialog>
+<p-toast position="bottom-center" key="editToast" />

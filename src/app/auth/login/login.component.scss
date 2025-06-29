@@ -1,0 +1,16 @@
+.login-style {
+  background-image: url("../../../images/pexels-lum3n-44775-399161.jpg");
+  height: 100vh;
+  display: flex;
+  background-size: cover;
+  align-items: center;
+  justify-content: center;
+}
+.back {
+  background: radial-gradient(
+    circle,
+    #ecc8c8 0%,
+    hsl(0, 16%, 91%) 50%,
+    #f0d3d5 100%
+  );
+}

@@ -1,0 +1,44 @@
+::ng-deep .p-component{
+font-family: 'Poppins';
+font-size: 13px;
+}
+::ng-deep .p-datatable .p-datatable-tbody > tr > td {
+    text-align: center;
+    padding: 0.7rem 0.7rem;
+    background-color: #e9e3e4fa;
+}
+::ng-deep .p-datatable .p-datatable-thead > tr > th  {
+    text-align: center;
+    padding: 0.7rem 0.7rem; 
+    background-color: #fff8f9fa;
+}
+::ng-deep .p-datatable .p-datatable-header {
+    background-color: #e9e3e4fa;
+}
+.back {
+    background-color: #e9e3e4fa;
+    height: calc(100vh - 60px);
+  }
+
+  ::ng-deep .p-paginator {
+    display: flex
+;
+background-color: #e9e3e4fa;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+}
+
+.highlightHighSal{
+    background-color: green;
+    color:white;
+    padding:8px 12px;
+    border-radius: 6px;
+}
+.highlightLowSal{
+    background-color: rgb(128, 0, 0);
+    color:white;
+    padding:8px 12px;
+    border-radius: 6px;
+}
+

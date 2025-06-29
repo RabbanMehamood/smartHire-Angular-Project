@@ -1,0 +1,252 @@
+<app-header></app-header>
+<div class="grid px-6 m-0 back">
+  <div class="col-12 my-2">
+    <h2 class="my-0">Dashbaord</h2>
+    <p class="my-0">OverView of your employee management system</p>
+  </div>
+  <div class="col grid gap-3">
+    <div class="col-12 md:col box p-3 fadeinleft animation-duration-2000">
+      <div class="flex align-items-center justify-content-between">
+        <h3 class="m-0">Total Employees</h3>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          height="24px"
+          viewBox="0 -960 960 960"
+          width="24px"
+          fill="#1f1f1f"
+        >
+          <path
+            d="M38-160v-94q0-35 18-63.5t50-42.5q73-32 131.5-46T358-420q62 0 120 14t131 46q32 14 50.5 42.5T678-254v94H38Zm700 0v-94q0-63-32-103.5T622-423q69 8 130 23.5t99 35.5q33 19 52 47t19 63v94H738ZM358-481q-66 0-108-42t-42-108q0-66 42-108t108-42q66 0 108 42t42 108q0 66-42 108t-108 42Zm360-150q0 66-42 108t-108 42q-11 0-24.5-1.5T519-488q24-25 36.5-61.5T568-631q0-45-12.5-79.5T519-774q11-3 24.5-5t24.5-2q66 0 108 42t42 108ZM98-220h520v-34q0-16-9.5-31T585-306q-72-32-121-43t-106-11q-57 0-106.5 11T130-306q-14 6-23 21t-9 31v34Zm260-321q39 0 64.5-25.5T448-631q0-39-25.5-64.5T358-721q-39 0-64.5 25.5T268-631q0 39 25.5 64.5T358-541Zm0 321Zm0-411Z"
+          />
+        </svg>
+      </div>
+      <h2 class="text-left text-4xl my-0">{{ users.length }}</h2>
+      <p class="text-left my-0">Active Employees</p>
+    </div>
+    <div class="col-12 md:col box p-3 flip animation-duration-2000">
+      <div class="flex align-items-center justify-content-between">
+        <h3 class="m-0">Average Salary</h3>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          height="24px"
+          viewBox="0 0 24 24"
+          width="24px"
+          fill="#1f1f1f"
+        >
+          <path d="M0 0h24v24H0V0z" fill="none" />
+          <path
+            d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"
+          />
+        </svg>
+      </div>
+      <h2 class="text-left text-4xl my-0">
+        {{ avgSalary | currency : "USD" : "symbol" : "0.0-0" }}
+      </h2>
+      <p class="text-left my-0">Average Salary Per Employee</p>
+    </div>
+    <div class="col-12 md:col box p-3 fadeinright animation-duration-2000">
+      <div class="flex align-items-center justify-content-between">
+        <h3 class="m-0">Department Breakdown</h3>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          enable-background="new 0 0 24 24"
+          height="24px"
+          viewBox="0 0 24 24"
+          width="24px"
+          fill="#1f1f1f"
+        >
+          <rect fill="none" height="24" width="24" />
+          <path
+            d="M12,7V3H2v18h20V7H12z M10,19H4v-2h6V19z M10,15H4v-2h6V15z M10,11H4V9h6V11z M10,7H4V5h6V7z M20,19h-8V9h8V19z M18,11h-4v2 h4V11z M18,15h-4v2h4V15z"
+          />
+        </svg>
+      </div>
+      <ul class="list-none px-1" *ngFor="let dept of departmentList">
+        <li class="grid">
+          <span class="col-6 text-left font-medium py-0">{{ dept[0] }}</span>
+          <span class="col-6 text-right font-medium py-0">{{ dept[1] }}</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="flex align-items-center col-12 my-0 gap-3 px-0">
+    <div
+      class="p-2 flex align-items-center border-round-sm surface-900 font-bold cursor-pointer"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        height="24px"
+        viewBox="0 0 24 24"
+        width="24px"
+        fill="#FFFFFF"
+      >
+        <g fill="none">
+          <path d="M0 0h24v24H0V0z" />
+          <path d="M0 0h24v24H0V0z" opacity=".87" />
+        </g>
+        <path
+          d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7zm-4 6h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z"
+        />
+      </svg>
+      <span class="ml-2 text-white text-md" (click)="navigate()">View Employees List</span>
+    </div>
+    <div
+      class="p-2 flex align-items-center border-round-sm surface-900 font-bold cursor-pointer"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        height="24px"
+        viewBox="0 0 24 24"
+        width="24px"
+        fill="#FFFFFF"
+      >
+        <path d="M0 0h24v24H0V0z" fill="none" />
+        <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />
+      </svg>
+      <span class="ml-1 text-white"  (click)="showDialog()" >Add Employee</span>
+    </div>
+  </div>
+  <div class="col-12 my-1">
+    <p-chart type="bar" [data]="data" [options]="options" />
+  </div>
+</div>
+
+
+<!-- //add-employee Modal p-dialog -->
+
+<p-dialog
+header="Add Employee"
+[(visible)]="visible"
+[modal]="true"
+[breakpoints]="{ '1199px': '75vw', '575px': '85vw' }"
+[style]="{ width: '55rem' }"
+>
+<form [formGroup]="employeeForm" class="grid gap-2">
+  <div class="grid col-12 md:col-6">
+    <label class="col-12" for="name">Employee Name:</label>
+    <input pInputText class="col-12" formControlName="name" />
+    <div *ngIf="employeeForm.get('name')?.invalid && submitted">
+      <small
+        *ngIf="employeeForm.get('name')?.errors?.['required']"
+        style="color: red"
+        >*Employee Name is required.</small
+      >
+      <small
+        *ngIf="employeeForm.get('name')?.errors?.['lettersOnly']"
+        style="color: red"
+        s
+        >Only letters allowed.</small
+      >
+      </div>
+  </div>
+
+  <div class="grid col-12 md:col-6">
+    <label class="col-12" for="email">Email:</label>
+    <input pInputText class="col-12" formControlName="email" />
+    <div *ngIf="employeeForm.get('email')?.invalid && submitted">
+      <small
+        *ngIf="employeeForm.get('email')?.errors?.['required']"
+        style="color: red"
+        >*Email is required.</small
+      >
+      <small
+      *ngIf="employeeForm.get('email')?.errors?.['email']"
+      style="color: red"
+      >Must be in email format</small
+    >
+      </div>
+  </div>
+
+  <div class="grid col-12 md:col-6">
+    <label class="col-12">Department:</label>
+    <p-dropdown
+      class="col-12"
+      [options]="departmentsArray"
+      formControlName="department"
+      optionLabel="name"
+      placeholder="Select Department"
+    ></p-dropdown>
+    <div *ngIf="employeeForm.get('department')?.invalid && submitted">
+      <small
+        *ngIf="employeeForm.get('department')?.errors?.['required']"
+        style="color: red"
+        >*Please select employee department.</small
+      >
+      </div>
+  </div>
+
+  <div class="grid col-12 md:col-6">
+    <label class="col-12">Role:</label>
+    <p-dropdown
+      class="col-12"
+      [options]="roles"
+      formControlName="role"
+      optionLabel="name"
+      placeholder="Select Role"
+      (onChange)="getRole($event)"
+    ></p-dropdown>
+    <div *ngIf="employeeForm.get('role')?.invalid && submitted">
+      <small
+        *ngIf="employeeForm.get('role')?.errors?.['required']"
+        style="color: red"
+        >*Please select the role.</small
+      >
+      </div>
+  </div>
+
+  <div class="grid col-12 md:col-6">
+    <label class="col-12">Salary:</label>
+    <input pInputText type="number" class="col-12" formControlName="salary" />
+    <div *ngIf="employeeForm.get('salary')?.invalid && submitted">
+      <small
+        *ngIf="employeeForm.get('salary')?.errors?.['required']"
+        style="color: red"
+        >*Please enter the salary.</small
+      >
+      </div>
+  </div>
+
+  <div class="grid col-12 md:col-6" *ngIf="selectedRole === 'Manager'">
+    <label class="col-12">Bonus:</label>
+    <input pInputText type="number" class="col-12" formControlName="bonus" />
+    <div *ngIf="employeeForm.get('bonus')?.invalid && submitted">
+      <small
+        *ngIf="employeeForm.get('bonus')?.errors?.['required']"
+        style="color: red"
+        >*Please enter bonus for the Manager.</small
+      >
+      </div>
+  </div>
+
+  <div class="grid col-12 md:col-6">
+    <label class="col-12">Joined Date:</label>
+    <input type="date" class="col-12" formControlName="joinedDate" />
+    <!-- <p-floatLabel class="col-12">
+      <p-calendar formControlName="joinedDate"  />
+      <label for="joinedDate">Joining Date</label>
+  </p-floatLabel> -->
+    <div *ngIf="employeeForm.get('joinedDate')?.invalid && submitted">
+      <small
+        *ngIf="employeeForm.get('joinedDate')?.errors?.['required']"
+        style="color: red"
+        >*Please select employee department.</small
+      >
+      </div>
+  </div>
+  <div class="grid justify-content-end align-content-end align-items-end col-12 md:col-6 ">
+    <div class="flex justify-content-end align-content-end align-items-end gap-2"> <p-button
+      label="Cancel"
+      (onClick)="visible = false"
+      severity="info"
+    ></p-button>
+    <p-button
+      label="Add"
+      severity="success"
+      (onClick)="addEmployee()"
+    ></p-button></div>
+</div>
+</form>
+</p-dialog>
+<p-toast position="bottom-center" key="addEmployeeToast" />
+
+

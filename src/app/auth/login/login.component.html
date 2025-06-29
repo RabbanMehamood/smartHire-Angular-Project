@@ -1,0 +1,62 @@
+<div class="login-style flex justify-content-center align-items-center">
+  <div
+    class="gap-2 surface-card p-4 border-round shadow-2 md:w-4 w-10 lg:w-3 bg-blue-900 back"
+  >
+    <h2 class="inline-block mb-4">Smart Hire Portal</h2>
+    <p-toast></p-toast>
+    <p class="text-center mb-6">Enter Credentials To Login</p>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+      <div class="grid mb-3">
+        <label class="col-12" for="username">Username: </label>
+        <input
+          class="col-12"
+          type="text"
+          inputId="username"
+          pInputText
+          formControlName="username"
+        />
+        <div *ngIf="loginForm.get('username')?.invalid && submitted">
+          <small
+            *ngIf="loginForm.get('username')?.errors?.['required']"
+            style="color: red"
+            >Name is required.</small
+          >
+          <small
+            *ngIf="loginForm.get('username')?.errors?.['lettersOnly']"
+            style="color: red"
+            s
+            >Only letters allowed.</small
+          >
+        </div>
+      </div>
+      <div class="grid mb-3">
+        <label class="col-12" for="password">Password: </label>
+        <input
+          pPassword
+          class="col-12"
+          type="password"
+          [feedback]="false"
+          inputId="password"
+          formControlName="password"
+        />
+        <div *ngIf="loginForm.get('password').invalid && submitted">
+          <small
+            *ngIf="loginForm.get('password').errors?.['required']"
+            style="color: red"
+            >Password is required</small
+          >
+        </div>
+      </div>
+      <div class="text-center">
+        <button
+          class="col-12"
+          pButton
+          pRipple
+          label="Submit"
+          class="p-button-success"
+        ></button>
+      </div>
+    </form>
+  </div>
+</div>
