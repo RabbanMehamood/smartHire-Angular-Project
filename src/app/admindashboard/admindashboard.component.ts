@@ -188,7 +188,7 @@ export class AdmindashboardComponent implements OnInit  {
 
   ///add employee modal methods and properties
 
-  visible: boolean = true;
+  visible: boolean = false;
   employeeName: string;
     showDialog() {
       this.visible = true;

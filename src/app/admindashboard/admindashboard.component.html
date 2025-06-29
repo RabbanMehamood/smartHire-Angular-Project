@@ -1,5 +1,5 @@
 <app-header></app-header>
-<div class="grid px-6 m-0 back">
+<div class="grid px-6 m-0 back h-auto">
   <div class="col-12 my-2">
     <h2 class="my-0">Dashbaord</h2>
     <p class="my-0">OverView of your employee management system</p>
@@ -186,7 +186,7 @@
       </small>
     </div>
 
-    <!-- Bonus (only if Manager) -->
+    <!-- Bonus field-->
     <div class="p-field mb-3" *ngIf="selectedRole === 'Manager'">
       <label for="bonus">Bonus</label>
       <input id="bonus" type="number" pInputText formControlName="bonus" />
