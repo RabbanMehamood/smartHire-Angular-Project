@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { TreeNode } from 'primeng/api';
-import { NgModel } from '@angular/forms';
 
 let treeData = [
   {
@@ -42,7 +41,7 @@ let treeData = [
         children: [
           {
             key: '0-1-0',
-            label: '',
+            label: 'Digital Advertisement',
             icon: 'pi pi-fw pi-file',
             data: 'Invoices for this month',
           },
@@ -96,7 +95,7 @@ export class EmpdashboardComponent {
 
   onAddClick(node: TreeNode) {
     this.editNode = node;
-    this.newChildLabel = '';
+    this.newChildLabel = '';  
   }
 
   addChild(parentNode: TreeNode) {
