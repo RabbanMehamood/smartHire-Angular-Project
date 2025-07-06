@@ -27,7 +27,7 @@ const routes: Routes = [
   },
   { path: 'empdashboard', loadChildren: () => import('./empdashboard/empdashboard.module').then(m => m.EmpdashboardModule) },
   { path: 'orgnisationchart', loadChildren: () => import('./balkanorg-chart/balkanorg-chart.module').then(m => m.BalkanorgChartModule) },
-  { path: 'orgchart', loadChildren: () => import('./organisation-chart/organisation-chart.module').then(m => m.OrganisationChartModule) },
+  { path: 'treechart', loadChildren: () => import('./organisation-chart/organisation-chart.module').then(m => m.OrganisationChartModule) },
 
 ];
 

@@ -5,6 +5,7 @@ export const blockLoginGuard: CanActivateFn = (route, state) => {
   const role = localStorage.getItem('username');
   
   if (role === 'Admin') {
+    
     return true;
   } else {
     router.navigate(['']);

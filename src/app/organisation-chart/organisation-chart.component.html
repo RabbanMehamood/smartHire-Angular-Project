@@ -1,17 +1,26 @@
 <app-header></app-header>
 <div class="select-tree-style">
-    <div class="select-div mb-4">
-        <p>Select Children To Add</p>
-        <div *ngFor="let category of categories" class="field-checkbox">
-            <p-checkbox 
-                [(ngModel)]="selectedCategories"
-                [label]="category.name" 
-                name="group" 
-                [value]="category" />
-        </div>
+  <div class="select-div mb-4">
+    <p>Select Children To Add</p>
+    <div *ngFor="let category of categories" class="field-checkbox">
+      <p-checkbox
+        [(ngModel)]="selectedCategories"
+        [label]="category.name"
+        name="group"
+        [value]="category"
+      />
     </div>
-    <div>
-        <organization-chart [datasource]="ds"></organization-chart>    </div>
-
-    </div>
-
+  </div>
+  <div class="tree-div">
+    
+    <organization-chart chartClass="myChart" [datasource]="ds" [nodeTemplate]="myNodeTemplate">
+    </organization-chart>
+    
+    <ng-template #myNodeTemplate let-nodeData="datasource">
+      <div (click)="selectNode(nodeData)">
+        <div class="position">{{nodeData.title}}</div>
+        <div class="fullname">{{nodeData.name}}</div>
+      </div>
+    </ng-template>
+  </div>
+</div>

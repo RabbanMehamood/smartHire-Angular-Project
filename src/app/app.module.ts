@@ -17,7 +17,8 @@ import { TableModule } from 'primeng/table';
 import { FormsModule } from '@angular/forms';
 import { EmployeeModule } from './employee/employee.module';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { OrganisationChartModule } from './organisation-chart/organisation-chart.module';
+import { OrgchartModule } from './orgchart/orgchart.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -39,6 +40,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     IconFieldModule,
     EmployeeModule,
     ReactiveFormsModule,
+    OrganisationChartModule,
+    OrgchartModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

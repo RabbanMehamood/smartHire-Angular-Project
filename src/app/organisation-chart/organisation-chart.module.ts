@@ -5,10 +5,11 @@ import { SharedModule } from '../shared/shared.module';
 
 import { OrganisationChartRoutingModule } from './organisation-chart-routing.module';
 import { OrganisationChartComponent } from './organisation-chart.component';
-  
+import { ReactiveFormsModule } from '@angular/forms';
+import { OrgchartModule } from '../orgchart/orgchart.module';
 import { CheckboxModule } from 'primeng/checkbox';
 import { FormsModule } from '@angular/forms';
-import { OrgchartModule } from '../orgchart/orgchart.module';
+
 @NgModule({
   declarations: [OrganisationChartComponent],
   imports: [
@@ -18,6 +19,8 @@ import { OrgchartModule } from '../orgchart/orgchart.module';
     CheckboxModule,
     FormsModule,
     OrgchartModule,
+    ReactiveFormsModule
   ],
+  exports: [OrganisationChartComponent],
 })
 export class OrganisationChartModule {}

@@ -58,7 +58,7 @@ export class LoginComponent implements OnInit {
         life: 500,
       });
        setTimeout(() => {
-        this.router.navigate(['/admindashboard']);
+        this.router.navigate(['/treechart']);
        }, 500);
    
     } else {

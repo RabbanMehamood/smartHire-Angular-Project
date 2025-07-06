@@ -1,0 +1,26 @@
+.custom-node-style{
+    background-color: aqua;
+    padding: 20px;
+}
+
+.select-tree-style{
+    width: 100vw;
+    display: flex;
+    flex-direction: row;
+}
+.select-div{
+    margin-top: 15px;
+    width: 15%;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    padding-left: 30px;
+    max-height: 86vh;
+    height:fit-content;
+    border-right: 2px solid black;
+}
+.tree-div{
+    width: 85%;
+    flex-grow: 1;
+}

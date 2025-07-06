@@ -8,6 +8,7 @@ import { HeaderComponent } from '../shared/header/header.component';
 import { CheckboxModule } from 'primeng/checkbox';
 import { FormsModule } from '@angular/forms';
 
+
 @NgModule({
   declarations: [
     BalkanorgChartComponent,
@@ -18,6 +19,7 @@ import { FormsModule } from '@angular/forms';
     BalkanorgChartRoutingModule,
     CheckboxModule,
     FormsModule
-  ]
+  ],
+
 })
 export class BalkanorgChartModule { }
