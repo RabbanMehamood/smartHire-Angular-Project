@@ -3,6 +3,8 @@
 		*ngTemplateOutlet="nodeTemplate ? nodeTemplate : defaultNodeTemplate; context:{ datasource:datasource,nodeHeading: nodeHeading, nodeContent: nodeContent }">
 	</ng-container>
 	<i *ngIf="datasource.children" [ngClass]="{'oc-icon-plus': isCollapsed, 'oc-icon-minus': !isCollapsed}" (click)="toggleChildren()" class="oc-toggle-btn oc-icon"></i>
+    
+	
 </div>
 <div *ngIf="datasource.children" [@expandCollapse]="isCollapsed ? 'collapsed' : 'expanded'"
 	(@expandCollapse.start)="toggleAnimStart($event)" (@expandCollapse.done)="toggleAnimEnd($event)"

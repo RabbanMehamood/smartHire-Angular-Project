@@ -1,13 +1,19 @@
-import { Component, OnInit, Input, Output, EventEmitter, TemplateRef } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  Output,
+  EventEmitter,
+  TemplateRef,
+} from '@angular/core';
 import { NodeSelectService } from '../shared/services/node-select.service';
 
 @Component({
   selector: 'organization-chart',
   templateUrl: './chart-container.component.html',
-  styleUrls: ['./chart-container.component.css']
+  styleUrls: ['./chart-container.component.css'],
 })
 export class ChartContainerComponent implements OnInit {
-
   @Input() datasource;
   @Input() nodeHeading = 'name';
   @Input() nodeContent = 'title';
@@ -32,8 +38,7 @@ export class ChartContainerComponent implements OnInit {
 
   constructor(private nodeSelectService: NodeSelectService) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   panEndHandler() {
     this.panning = false;
@@ -75,7 +80,10 @@ export class ChartContainerComponent implements OnInit {
   }
 
   panStartHandler(e) {
-    if (e.target.querySelectorAll('.node') && e.target.querySelectorAll('.node').length) {
+    if (
+      e.target.querySelectorAll('.node') &&
+      e.target.querySelectorAll('.node').length
+    ) {
       this.panning = false;
       return;
     } else {
@@ -147,5 +155,6 @@ export class ChartContainerComponent implements OnInit {
 
   onNodeClick(nodeData: any) {
     this.nodeClick.emit(nodeData);
+    console.log(nodeData);
   }
 }
