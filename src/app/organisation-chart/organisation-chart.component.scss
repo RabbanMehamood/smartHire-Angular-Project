@@ -1,29 +1,121 @@
-.custom-node-style{
-    background-color: aqua;
-    padding: 20px;
+.custom-node-style {
+  background-color: aqua;
+  padding: 20px;
 }
 
-.select-tree-style{
-    width: 100vw;
-    display: flex;
-    flex-direction: row;
+.select-tree-style {
+  width: 100vw;
+  display: flex;
+  flex-direction: row;
 }
-.select-div{
-    margin-top: 15px;
-    width: 15%;
+.select-div {
+  margin-top: 15px;
+  width: 15%;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  padding-left: 30px;
+  max-height: 86vh;
+  height: fit-content;
+  border-right: 2px solid black;
+}
+.tree-div {
+  width: 85%;
+  flex-grow: 1;
+}
+#chart-container{
+    height: 80%;
+}
+::ng-deep .orgchart {
+  display: inline-block;
+  min-height: 90%;
+  min-width: 202px;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-image: none;
+  padding: 20px;
+}
+
+
+
+::ng-deep .orgchart .node .title {
+  text-align: center;
+  font-size: 12px;
+  font-weight: bold;
+  height: 20px;
+  line-height: 20px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  background-color: #21404c;
+  color: #ffffff;
+  border-radius: 4px 4px 0 0;
+}
+::ng-deep .orgchart .node .content {
+    width: 100%;
+    height: 20px;
+    font-size: 11px;
+    line-height: 18px;
+    border:none;
+    border-radius: 0 0 4px 4px;
+    text-align: center;
+    background-color: #21404c;
+    color: #ffffff;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+::ng-deep .orgchart tr.lines .leftLine {
+    border-left: 1px solid #21404c !important;
+    float: none;
+    border-radius: 0;
+}
+
+::ng-deep .orgchart tr.lines .topLine {
+    border-top: 2px solid #21404c;
+}
+
+::ng-deep .orgchart tr.lines .downLine {
+    background-color: #21404c;
+    margin: 0 auto;
+    height: 20px;
+    width: 2px;
+    float: none;
+}
+::ng-deep #chart-container {
+    position: relative;
+    display: inline-block;
+    top: 10px;
+    left: 10px;
+    height: 420px;
+    width: calc(100% - 24px);
+    border:none; 
+    border-radius: 5px;
     overflow: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    padding-left: 30px;
-    max-height: 86vh;
-    height:fit-content;
-    border-right: 2px solid black;
-}
-.tree-div{
-    width: 85%;
-    flex-grow: 1;
+    text-align: center;
+    font-family: "Helvetica Neue",
+    Helvetica,
+    Arial,
+    sans-serif;
+    font-size: 14px;
 }
 
+::ng-deep .orgchart tr.lines .rightLine {
+    border-right: 1px solid #21404c;
+    float: none;
+    border-radius: 0;
+}
 
+.view-state {
+display: flex;
+flex-direction: row;
+justify-content: space-around;
+align-items: center;
+}
 
