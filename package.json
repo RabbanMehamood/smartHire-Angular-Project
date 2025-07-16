@@ -21,6 +21,7 @@
     "@angular/router": "^17.3.0",
     "@balkangraph/orgchart.js": "^8.19.29",
     "@circlon/angular-tree-component": "^11.0.4",
+    "angular-gridster2": "^17.0.0",
     "chart.js": "^4.5.0",
     "font-awesome": "^4.7.0",
     "orgchart": "^5.0.0",

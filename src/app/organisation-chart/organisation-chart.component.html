@@ -10,9 +10,10 @@
         [value]="category"
       />
     </div>
+    <button id="add-selected-categories">Add Selected Nodes</button>
   </div>
   <div id="treeDiv" class="tree-div">
-    <div id="chart-container"></div>
+    <div id="chart-container" #orgTree></div>
     <div id="edit-panel" class="view-state">
       <div>
         <span id="chart-state-panel" class="radio-panel">
@@ -31,40 +32,47 @@
           /><label for="rd-edit">Edit</label>
         </span>
       </div>
-         <div>
+      <div>
         <label class="selected-node-group">selected node:</label>
         <input type="text" id="selected-node" class="selected-node-group" />
       </div>
-      <div style="display: flex; direction: row; align-items: center; justify-content: space-around;">
+      <div
+        style="
+          display: flex;
+          direction: row;
+          align-items: center;
+          justify-content: space-around;
+        "
+      >
         <label>new node:</label>
         <ul id="new-nodelist">
-          <li><input type="text" class="new-node"/></li>
+          <li><input type="text" class="new-node" /></li>
         </ul>
         <i class="fa fa-plus-circle btn-inputs" id="btn-add-input"></i>
         <i class="fa fa-minus-circle btn-inputs" id="btn-remove-input"></i>
       </div>
-      
-        <span id="node-type-panel" class="radio-panel">
-          <input
-            type="radio"
-            name="node-type"
-            id="rd-parent"
-            value="parent"
-          /><label for="rd-parent">Parent(root)</label>
-          <input
-            type="radio"
-            name="node-type"
-            id="rd-child"
-            value="children"
-          /><label for="rd-child">Child</label>
-          <input
-            type="radio"
-            name="node-type"
-            id="rd-sibling"
-            value="siblings"
-          /><label for="rd-sibling">Sibling</label>
-        </span>
-      
+
+      <span id="node-type-panel" class="radio-panel">
+        <input
+          type="radio"
+          name="node-type"
+          id="rd-parent"
+          value="parent"
+        /><label for="rd-parent">Parent(root)</label>
+        <input
+          type="radio"
+          name="node-type"
+          id="rd-child"
+          value="children"
+        /><label for="rd-child">Child</label>
+        <input
+          type="radio"
+          name="node-type"
+          id="rd-sibling"
+          value="siblings"
+        /><label for="rd-sibling">Sibling</label>
+      </span>
+
       <div>
         <button type="button" id="btn-add-nodes">Add</button>
         <button type="button" id="btn-delete-nodes">Delete</button>

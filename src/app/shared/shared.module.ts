@@ -7,12 +7,23 @@ import { SalaryHightlightDirective } from './directives/salary-hightlight.direct
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { ToastModule } from 'primeng/toast';
-
+import { RouterModule } from '@angular/router';
 
 @NgModule({
-  declarations: [HeaderComponent, SearchSortPipePipe, SalaryHightlightDirective],
-  imports: [CommonModule, ButtonModule,ConfirmDialogModule,ConfirmPopupModule,ToastModule],
+  declarations: [
+    HeaderComponent,
+    SearchSortPipePipe,
+    SalaryHightlightDirective,
+  ],
+  imports: [
+    CommonModule,
+    ButtonModule,
+    ConfirmDialogModule,
+    ConfirmPopupModule,
+    ToastModule,
+    RouterModule,
+  ],
   exports: [HeaderComponent, SearchSortPipePipe, SalaryHightlightDirective],
-  providers: [SearchSortPipePipe,SalaryHightlightDirective]
+  providers: [SearchSortPipePipe, SalaryHightlightDirective],
 })
 export class SharedModule {}

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { ConfirmPopup } from 'primeng/confirmpopup';
+
 import { ConfirmationService, MessageService } from 'primeng/api';
 
 @Component({
@@ -9,7 +10,11 @@ import { ConfirmationService, MessageService } from 'primeng/api';
   styleUrl: './header.component.scss',
 })
 export class HeaderComponent {
-  constructor(private router: Router,private messageService:MessageService,private confirmationService:ConfirmationService ) {}
+  constructor(
+    private router: Router,
+    private messageService: MessageService,
+    private confirmationService: ConfirmationService
+  ) {}
 
   logout(event: Event): void {
     this.confirmationService.confirm({
@@ -19,7 +24,7 @@ export class HeaderComponent {
       accept: () => {
         localStorage.clear();
         this.messageService.add({
-          key:'logoutToast',
+          key: 'logoutToast',
           severity: 'success',
           summary: 'Logged Out',
           detail: 'You have been successfully logged out',
@@ -29,7 +34,7 @@ export class HeaderComponent {
       },
       reject: () => {
         this.messageService.add({
-          key:'logoutToast',
+          key: 'logoutToast',
           severity: 'info',
           summary: 'Cancelled',
           detail: 'You remained logged in',

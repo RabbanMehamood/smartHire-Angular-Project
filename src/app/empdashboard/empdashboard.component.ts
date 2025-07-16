@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { TreeNode } from 'primeng/api';
 
 let treeData = [
@@ -69,13 +69,23 @@ let treeData = [
   templateUrl: './empdashboard.component.html',
   styleUrl: './empdashboard.component.scss',
 })
-export class EmpdashboardComponent {
+export class EmpdashboardComponent implements AfterViewChecked {
+  @ViewChild('heading') hElement: ElementRef;
+
   files!: TreeNode[];
   editNode: TreeNode | null = null;
   newChildLabel: string = '';
 
   ngOnInit() {
     this.files = treeData;
+  }
+  ngAfterViewChecked(): void {
+
+    //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
+    //Add 'implements AfterViewInit' to the class.
+    this.hElement.nativeElement.addEventListener('click', ($event) => {
+      console.log($event.innerText);  
+    });
   }
 
   expandAll() {
@@ -95,7 +105,7 @@ export class EmpdashboardComponent {
 
   onAddClick(node: TreeNode) {
     this.editNode = node;
-    this.newChildLabel = '';  
+    this.newChildLabel = '';
   }
 
   addChild(parentNode: TreeNode) {

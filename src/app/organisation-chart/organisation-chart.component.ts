@@ -1,5 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  OnInit,
+  ViewChild,
+  viewChild,
+} from '@angular/core';
 import OrgChart from 'orgchart.js/src/orgchart.js';
+import { subscribeOn } from 'rxjs';
 
 @Component({
   selector: 'app-organisation-chart',
@@ -7,34 +14,41 @@ import OrgChart from 'orgchart.js/src/orgchart.js';
   styleUrl: './organisation-chart.component.scss',
 })
 export class OrganisationChartComponent implements OnInit {
-  selectedCategories: any[] = [];
-  categories: any[] = [
-    { name: 'Accounting' },
-    { name: 'Marketing' },
-    { name: 'Production' },
-    { name: 'Research' },
-    { name: 'Human Resources' },
-    { name: 'Information Technology' },
-    { name: 'Customer Service' },
-    { name: 'Legal' },
-    { name: 'Sales' },
-    { name: 'Finance' },
-    { name: 'Quality Assurance' },
-    { name: 'Logistics' },
-    { name: 'Procurement' },
-    { name: 'Public Relations' },
-    { name: 'Product Development' },
-    { name: 'Operations' },
-    { name: 'Training and Development' },
-    { name: 'Compliance' },
-    { name: 'Security' },
-    { name: 'Data Analytics' },
-    { name: 'Creative Services' },
-    { name: 'Technical Support' },
-    { name: 'Business Intelligence' },
-    { name: 'Maintenance' },
-    { name: 'Environmental Health and Safety' },
-  ];
+  @ViewChild('orgTree') orgTreeEl: ElementRef;
+
+  selectedCategories: any[];
+  categories: any[];
+
+  constructor(private el: ElementRef) {
+    this.selectedCategories = [];
+    this.categories = [
+      { name: 'Accounting' },
+      { name: 'Marketing' },
+      { name: 'Production' },
+      { name: 'Research' },
+      { name: 'Human Resources' },
+      { name: 'Information Technology' },
+      { name: 'Customer Service' },
+      { name: 'Legal' },
+      { name: 'Sales' },
+      { name: 'Finance' },
+      { name: 'Quality Assurance' },
+      { name: 'Logistics' },
+      { name: 'Procurement' },
+      { name: 'Public Relations' },
+      { name: 'Product Development' },
+      { name: 'Operations' },
+      { name: 'Training and Development' },
+      { name: 'Compliance' },
+      { name: 'Security' },
+      { name: 'Data Analytics' },
+      { name: 'Creative Services' },
+      { name: 'Technical Support' },
+      { name: 'Business Intelligence' },
+      { name: 'Maintenance' },
+      { name: 'Environmental Health and Safety' },
+    ];
+  }
 
   ngOnInit(): void {
     const datasource = {
@@ -155,13 +169,21 @@ export class OrganisationChartComponent implements OnInit {
       }
     }
 
-    function addNodes(orgchart: any) {
-      const nodeVals: string[] = [];
-      const newNodes = document.querySelectorAll('.new-node');
-      newNodes.forEach((input) => {
-        const val = (input as HTMLInputElement).value.trim();
-        if (val) nodeVals.push(val);
-      });
+    const addNodes = (orgchart: any) => {
+      let nodeVals: string[] = [];
+
+      nodeVals = this.selectedCategories.map(
+        (selectedItem) => selectedItem.name
+      );
+      this.categories = this.categories.filter(
+        (selectedItem) => !this.selectedCategories.includes(selectedItem)
+      );
+      this.selectedCategories = [];
+      // const newNodes = document.querySelectorAll('.new-node');
+      // newNodes.forEach((input) => {
+      //   const val = (input as HTMLInputElement).value.trim();
+      //   if (val) nodeVals.push(val);
+      // });
 
       const selectedInput = document.getElementById(
         'selected-node'
@@ -238,15 +260,15 @@ export class OrganisationChartComponent implements OnInit {
           });
         }
       }
-    }
+    };
 
-    function deleteNodes(orgchart: any) {
+    const deleteNodes = (orgchart: any) => {
       const sNodeInput = document.getElementById(
         'selected-node'
       ) as HTMLInputElement;
       const sNodeId = (sNodeInput.dataset as any)['node'];
       const sNode = document.getElementById(sNodeId || '');
-
+      this.categories.unshift({ name: sNode.innerText });
       if (!sNode) {
         alert('Please select a node to delete');
         return;
@@ -255,7 +277,7 @@ export class OrganisationChartComponent implements OnInit {
       orgchart.removeNodes(sNode);
       sNodeInput.value = '';
       (sNodeInput.dataset as any)['node'] = '';
-    }
+    };
 
     function resetPanel() {
       const fNode = document.querySelector('.orgchart .focused');
@@ -308,15 +330,15 @@ export class OrganisationChartComponent implements OnInit {
       }
     }
 
-  
-    let orgchart: any;
-
-    orgchart = new OrgChart({
+    let orgchart = new OrgChart({
       chartContainer: '#chart-container',
       data: datasource,
-      nodeContent: 'title',
+      // nodeContent: 'title',
+      toggleSiblingsResp: false,
       parentNodeSymbol: 'fa-users',
       draggable: true,
+      pan: true,
+      zoom: true,
       createNode: function (node: any, data: any) {
         node.id = getId();
       },
@@ -331,13 +353,64 @@ export class OrganisationChartComponent implements OnInit {
       ?.addEventListener('click', addInputs);
     document
       .getElementById('btn-remove-input')
-      ?.addEventListener('click', removeInputs);
+      .addEventListener('click', removeInputs);
     document
       .getElementById('btn-add-nodes')
-      ?.addEventListener('click', () => addNodes(orgchart));
+      .addEventListener('click', () => addNodes(orgchart));
     document
       .getElementById('btn-delete-nodes')
-      ?.addEventListener('click', () => deleteNodes(orgchart));
+      .addEventListener('click', () => deleteNodes(orgchart));
     document.getElementById('btn-reset')?.addEventListener('click', resetPanel);
+
+    //left icon change and adding event listener
+
+    setTimeout(() => {
+      const leftEdges =
+        this.orgTreeEl.nativeElement.getElementsByClassName('leftEdge');
+      if (!leftEdges.length) {
+        console.warn('No leftEdge elements found.');
+        return;
+      }
+      Array.from(leftEdges).forEach((element: HTMLElement) => {
+        element.classList.remove('fa-chevron-right');
+        element.classList.add('fa', 'fa-plus');
+        element.addEventListener('click', () => addNodes(orgchart));
+      });
+    }, 500);
+  }
+
+  ngAfterViewInit(): void {
+    debugger;
+    console.log(
+      this.orgTreeEl.nativeElement.getElementsByClassName('leftEdge')
+    );
+    const leftEdges =
+      this.orgTreeEl.nativeElement.getElementsByClassName('leftEdge');
+    console.log(leftEdges);
+    if (!leftEdges.length) {
+      console.warn('No leftEdge elements found.');
+      return;
+    }
+    Array.from(leftEdges).forEach((element: HTMLElement) => {
+      element.classList.remove('fa-chevron-right');
+      element.classList.add('fa', 'fa-plus');
+    });
+    // setTimeout(() => {
+    //   const leftEdges =
+    //     this.orgTreeEl.nativeElement.getElementsByClassName('leftEdge');
+    //   console.log(
+    //     this.orgTreeEl.nativeElement.getElementsByClassName('leftEdge')
+    //   );
+
+    //   if (!leftEdges.length) {
+    //     console.warn('No leftEdge elements found.');
+    //     return;
+    //   }
+    //   Array.from(leftEdges).forEach((element: HTMLElement) => {
+    //     element.classList.remove('fa-chevron-right');
+    //     element.classList.add('fa', 'fa-plus');
+    //   });
+    // }, 500);
   }
 }
+

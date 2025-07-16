@@ -1,7 +1,7 @@
 <header class="app-header px-6 py-5">
-  <h1>SmartHire</h1>
+  <h1 routerLink="/admindashboard" class="cursor-pointer">SmartHire</h1>
   <span class="role hidden md:block">Welcome Admin</span>
-  <p-button label="Logout" [severity]="'contrast'" (onClick)="logout($event)"/>
+  <p-button label="Logout" [severity]="'contrast'" (onClick)="logout($event)" />
 </header>
 <p-confirmPopup />
-<p-toast  key="logoutToast" position="top-center"></p-toast>
+<p-toast key="logoutToast" position="top-center"></p-toast>

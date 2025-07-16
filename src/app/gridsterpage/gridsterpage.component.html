@@ -1,0 +1,84 @@
+<app-header></app-header>
+<div class="addWidgets p-3">
+  <p-button (onClick)="showDialog()" severity="contrast">Add Widget</p-button>
+</div>
+
+<div style="width: 100vw; height: 92vh">
+  <gridster [options]="options">
+    @for (item of dashboard; track item) {
+    <gridster-item [item]="item" style="overflow: auto">
+      <div
+        class="grid-item flex flex-column justify-content-center align-items-center"
+      >
+        <p style="background-color: brown; border-radius: 6px; color: white;" class="p-1">{{ item["label"] }}</p>
+        <p *ngIf="item['info']">{{ item["info"] }}</p>
+
+        <ng-template [ngIf]="item['data']">
+          <p-chart
+            type="pie"
+            [data]="item['data']"
+            [options]="options"
+            width="250px"
+            height="250px"
+          />
+        </ng-template>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          height="24px"
+          viewBox="0 -960 960 960"
+          width="24px"
+          style="position: absolute; right: 0px; top: 0px"
+          fill="#000000"
+          (mousedown)="removeItem($event, item)"
+          (touchstart)="removeItem($event, item)"
+          class="cursor-pointer m-2"
+        >
+          <path
+            d="m287.48-211.93-73.78-75.55L405.22-480 213.7-674.04l73.78-75.79 193.28 194.05 191.76-194.05 73.78 75.79L554.78-480 746.3-287.48l-73.78 75.55-191.76-194.05-193.28 194.05Z"
+          />
+        </svg>
+        <svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 -960 960 960" width="18px" fill="#000000"  style="position: absolute; right: 30px; top: 3px"  class="cursor-pointer m-2"><path d="M190.01-190.58h48.9l406.42-405.49-47.76-48.83-407.56 406.81v47.51ZM94.15-94.15v-183.7l567.46-567.47q9.75-9.65 22.92-14.95 13.16-5.3 27.53-5.3 13.78 0 26.52 5.08t24.29 14.17l84.01 82.88q10.32 11.37 14.93 24.52 4.61 13.16 4.61 26.94 0 14.28-5.11 27.6-5.11 13.31-14.54 22.55L278.61-94.15H94.15Zm666.6-618.47-46.89-47.13 46.89 47.13ZM622-620.9l-24.43-24 47.76 48.57L622-620.9Z"/></svg>
+      </div>
+    </gridster-item>
+    }
+  </gridster>
+</div>
+
+<div class="card flex justify-content-center">
+  <p-dialog
+    header="Add Widget"
+    [modal]="true"
+    [(visible)]="visible"
+    [style]="{ width: '25rem' }"
+  >
+    <span class="p-text-secondary block mb-5">Enter Details About Widget</span>
+    <div class="flex align-items-center gap-3 mb-3">
+      <label for="username" class="font-semibold w-6rem">Label</label>
+      <input
+        pInputText
+        id="username"
+        class="flex-auto"
+        [(ngModel)]="widgetLabel"
+        autocomplete="off"
+      />
+    </div>
+    <div class="flex align-items-center gap-3 mb-5">
+      <label for="email" class="font-semibold w-6rem">Info</label>
+      <input
+        pInputText
+        id="email"
+        class="flex-auto"
+        [(ngModel)]="widgetInfo"
+        autocomplete="off"
+      />
+    </div>
+    <div class="flex justify-content-end gap-2">
+      <p-button
+        label="Cancel"
+        severity="secondary"
+        (onClick)="visible = false"
+      />
+      <p-button label="Save" (onClick)="addItem()" />
+    </div>
+  </p-dialog>
+</div>

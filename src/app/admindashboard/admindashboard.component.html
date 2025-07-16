@@ -88,7 +88,9 @@
           d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7zm-4 6h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z"
         />
       </svg>
-      <span class="ml-2 text-white text-md" (click)="navigate()">View Employees List</span>
+      <span class="ml-2 text-white text-md" (click)="navigate()"
+        >View Employees List</span
+      >
     </div>
     <div
       class="p-2 flex align-items-center border-round-sm surface-900 font-bold cursor-pointer"
@@ -103,14 +105,65 @@
         <path d="M0 0h24v24H0V0z" fill="none" />
         <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />
       </svg>
-      <span class="ml-1 text-white"  (click)="showDialog()" >Add Employee</span>
+      <span class="ml-1 text-white" (click)="showDialog()">Add Employee</span>
+    </div>
+    <div
+      class="p-2 flex align-items-center border-round-sm surface-900 font-bold cursor-pointer"
+      routerLink="/treechart"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        height="24px"
+        viewBox="0 -960 960 960"
+        width="24px"
+        fill="#ffffff"
+      >
+        <path
+          d="M120-80v-280h120v-160h200v-80H320v-280h320v280H520v80h200v160h120v280H520v-280h120v-80H320v80h120v280H120Zm280-600h160v-120H400v120ZM200-160h160v-120H200v120Zm400 0h160v-120H600v120ZM480-680ZM360-280Zm240 0Z"
+        />
+      </svg>
+      <span class="ml-2 text-white text-md">Organisation Chart</span>
+    </div>
+    <div
+      class="p-2 flex align-items-center border-round-sm surface-900 font-bold cursor-pointer"
+      routerLink="/empdashboard"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        height="24px"
+        viewBox="0 -960 960 960"
+        width="24px"
+        fill="#ffffff"
+      >
+        <path
+          d="M200-80q-50 0-85-35t-35-85q0-39 22.5-70t57.5-43v-87q0-50 35-85t85-35h160v-127q-35-12-57.5-43T360-760q0-50 35-85t85-35q50 0 85 35t35 85q0 39-22.5 70T520-647v127h160q50 0 85 35t35 85v87q35 12 57.5 43t22.5 70q0 50-35 85t-85 35q-50 0-85-35t-35-85q0-39 22.5-70t57.5-43v-87q0-17-11.5-28.5T680-440H520v127q35 12 57.5 43t22.5 70q0 50-35 85t-85 35q-50 0-85-35t-35-85q0-39 22.5-70t57.5-43v-127H280q-17 0-28.5 11.5T240-400v87q35 12 57.5 43t22.5 70q0 50-35 85t-85 35Zm0-80q17 0 28.5-11.5T240-200q0-17-11.5-28.5T200-240q-17 0-28.5 11.5T160-200q0 17 11.5 28.5T200-160Zm280 0q17 0 28.5-11.5T520-200q0-17-11.5-28.5T480-240q-17 0-28.5 11.5T440-200q0 17 11.5 28.5T480-160Zm280 0q17 0 28.5-11.5T800-200q0-17-11.5-28.5T760-240q-17 0-28.5 11.5T720-200q0 17 11.5 28.5T760-160ZM480-720q17 0 28.5-11.5T520-760q0-17-11.5-28.5T480-800q-17 0-28.5 11.5T440-760q0 17 11.5 28.5T480-720Z"
+        />
+      </svg>
+      <span class="ml-2 text-white text-md">Tree Structure </span>
+    </div>
+    <div
+      class="p-2 flex align-items-center border-round-sm surface-900 font-bold cursor-pointer"
+      routerLink="/gridsterpage"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        height="24px"
+        viewBox="0 -960 960 960"
+        width="24px"
+        fill="#ffffff"
+      >
+        <path
+          d="M120-520v-320h320v320H120Zm0 400v-320h320v320H120Zm400-400v-320h320v320H520Zm0 400v-320h320v320H520ZM200-600h160v-160H200v160Zm400 0h160v-160H600v160Zm0 400h160v-160H600v160Zm-400 0h160v-160H200v160Zm400-400Zm0 240Zm-240 0Zm0-240Z"
+        />
+      </svg>
+
+      <span class="ml-2 text-white text-md">Gridster View </span>
     </div>
   </div>
   <div class="col-12 my-1">
     <p-chart type="bar" [data]="data" [options]="options" />
   </div>
 </div>
-
 
 <!-- //add-employee Modal p-dialog -->
 <p-dialog
@@ -121,15 +174,20 @@
   [style]="{ width: '25rem' }"
 >
   <form [formGroup]="employeeForm" class="p-fluid">
-    
     <!-- Name -->
     <div class="p-field mb-3">
       <label for="name">Employee Name</label>
       <input id="name" type="text" pInputText formControlName="name" />
-      <small *ngIf="employeeForm.get('name')?.hasError('required') && submitted" style="color: red">
+      <small
+        *ngIf="employeeForm.get('name')?.hasError('required') && submitted"
+        style="color: red"
+      >
         *Employee Name is required.
       </small>
-      <small *ngIf="employeeForm.get('name')?.hasError('lettersOnly') && submitted" style="color: red">
+      <small
+        *ngIf="employeeForm.get('name')?.hasError('lettersOnly') && submitted"
+        style="color: red"
+      >
         Only letters allowed.
       </small>
     </div>
@@ -138,10 +196,16 @@
     <div class="p-field mb-3">
       <label for="email">Email</label>
       <input id="email" type="email" pInputText formControlName="email" />
-      <small *ngIf="employeeForm.get('email')?.hasError('required') && submitted" style="color: red">
+      <small
+        *ngIf="employeeForm.get('email')?.hasError('required') && submitted"
+        style="color: red"
+      >
         *Email is required.
       </small>
-      <small *ngIf="employeeForm.get('email')?.hasError('email') && submitted" style="color: red">
+      <small
+        *ngIf="employeeForm.get('email')?.hasError('email') && submitted"
+        style="color: red"
+      >
         Must be in valid email format.
       </small>
     </div>
@@ -156,7 +220,12 @@
         optionLabel="name"
         placeholder="Select Department"
       ></p-dropdown>
-      <small *ngIf="employeeForm.get('department')?.hasError('required') && submitted" style="color: red">
+      <small
+        *ngIf="
+          employeeForm.get('department')?.hasError('required') && submitted
+        "
+        style="color: red"
+      >
         *Please select a department.
       </small>
     </div>
@@ -172,7 +241,10 @@
         placeholder="Select Role"
         (onChange)="getRole($event)"
       ></p-dropdown>
-      <small *ngIf="employeeForm.get('role')?.hasError('required') && submitted" style="color: red">
+      <small
+        *ngIf="employeeForm.get('role')?.hasError('required') && submitted"
+        style="color: red"
+      >
         *Please select a role.
       </small>
     </div>
@@ -181,7 +253,10 @@
     <div class="p-field mb-3">
       <label for="salary">Salary</label>
       <input id="salary" type="number" pInputText formControlName="salary" />
-      <small *ngIf="employeeForm.get('salary')?.hasError('required') && submitted" style="color: red">
+      <small
+        *ngIf="employeeForm.get('salary')?.hasError('required') && submitted"
+        style="color: red"
+      >
         *Salary is required.
       </small>
     </div>
@@ -190,7 +265,10 @@
     <div class="p-field mb-3" *ngIf="selectedRole === 'Manager'">
       <label for="bonus">Bonus</label>
       <input id="bonus" type="number" pInputText formControlName="bonus" />
-      <small *ngIf="employeeForm.get('bonus')?.hasError('required') && submitted" style="color: red">
+      <small
+        *ngIf="employeeForm.get('bonus')?.hasError('required') && submitted"
+        style="color: red"
+      >
         *Bonus is required for Manager role.
       </small>
     </div>
@@ -198,8 +276,19 @@
     <!-- Joined Date -->
     <div class="p-field mb-3">
       <label for="joinedDate">Joined Date</label>
-      <input id="joinedDate" type="date" pInputText formControlName="joinedDate" [max]="today" />
-      <small *ngIf="employeeForm.get('joinedDate')?.hasError('required') && submitted" style="color: red">
+      <input
+        id="joinedDate"
+        type="date"
+        pInputText
+        formControlName="joinedDate"
+        [max]="today"
+      />
+      <small
+        *ngIf="
+          employeeForm.get('joinedDate')?.hasError('required') && submitted
+        "
+        style="color: red"
+      >
         *Please select the joining date.
       </small>
     </div>
@@ -218,11 +307,9 @@
         icon="pi pi-check"
         (onClick)="addEmployee()"
         severity="success"
-        ></p-button>
+      ></p-button>
     </div>
   </form>
 </p-dialog>
 
 <p-toast position="bottom-center" key="addEmployeeToast" />
-
-
