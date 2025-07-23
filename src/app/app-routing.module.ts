@@ -46,6 +46,7 @@ const routes: Routes = [
       ),
   },
   { path: 'gridsterpage', loadChildren: () => import('./gridsterpage/gridsterpage.module').then(m => m.GridsterpageModule) },
+  { path: 'mermaid', loadChildren: () => import('./mermaid/mermaid.module').then(m => m.MermaidModule) },
 ];
 
 @NgModule({

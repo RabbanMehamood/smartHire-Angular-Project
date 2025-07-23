@@ -1,6 +1,19 @@
 ::ng-deep gridster-item {
   border-radius: 6px !important;
+  background-color: #c4a484 !important ;
 }
 .addWidgets {
   background-color: grey;
+}
+::ng-deep .p-dialog .p-dialog-content {
+  background: #d1b79e;
+  color: #000000;
+  padding: 0 1.5rem 2rem 1.5rem;
+}
+::ng-deep .p-dialog-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+  background-color: #d1b79e;
 }

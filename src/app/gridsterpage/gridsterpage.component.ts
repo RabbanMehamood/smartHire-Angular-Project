@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { GridsterConfig, GridsterItem } from 'angular-gridster2';
 import { EmployeeserviceService } from '../employee/service/employeeservice.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FloatLabelModule } from 'primeng/floatlabel';
 
 @Component({
   selector: 'app-gridsterpage',
@@ -8,9 +10,12 @@ import { EmployeeserviceService } from '../employee/service/employeeservice.serv
   styleUrl: './gridsterpage.component.scss',
 })
 export class GridsterpageComponent {
+  widgetForm!: FormGroup;
+
   visible: boolean = false;
-  widgetLabel: string = '';
-  widgetInfo: string = '';
+
+  chartWidth: string = '250px';
+  chartHeight: string = '250px';
 
   showDialog() {
     this.visible = true;
@@ -19,27 +24,56 @@ export class GridsterpageComponent {
   options: GridsterConfig;
   dashboard: Array<GridsterItem>;
 
-  constructor(private empService: EmployeeserviceService) {}
+  constructor(
+    private empService: EmployeeserviceService,
+    private fb: FormBuilder
+  ) {}
 
   ngOnInit(): void {
+    this.widgetForm = this.fb.group({
+      widgetLabel: ['', Validators.required],
+      widgetInfo: ['', Validators.required],
+    });
+
     this.empService.getUsers().subscribe({
       next: (res: {}) => {
         console.log(res);
         this.dashboard[0]['data'] = {
-          labels: ['A', 'B', 'C'],
+          labels: [
+            'Engineering',
+            'Sales',
+            'Advertisement',
+            'Marketing',
+            'Finance',
+          ],
           datasets: [
             {
-              data: [540, 325, 702],
-              backgroundColor: ['green', 'orange', 'brown'],
+              label: 'Department',
+              data: [90, 45, 70, 55, 600],
+              backgroundColor: [
+                'Green',
+                'Teal',
+                'Brown',
+                'SteelBlue',
+                'MidnightBlue',
+              ],
             },
           ],
         };
         this.dashboard[0]['options'] = {
+          layout: {
+            margin: {
+              top: 0,
+              bottom: 0,
+              left: 0,
+              right: 150,
+            },
+          },
           plugins: {
             legend: {
+              position: 'right',
               labels: {
-                usePointStyle: true,
-                color: '#000000',
+                color: '#495057',
               },
             },
           },
@@ -66,20 +100,54 @@ export class GridsterpageComponent {
 
     this.dashboard = [
       {
+        id: 1,
         cols: 2,
         rows: 3,
         y: 0,
         x: 0,
         label: 'Employee Pie-chart',
-        info: 'Displaying Pie-chart',
+        info: 'Percentage of Employees',
         data: {},
         options: {},
       },
-      { cols: 1, rows: 2, y: 0, x: 1, label: 'widget 2' },
-      { cols: 1, rows: 2, y: 2, x: 5, label: 'widget 3' },
-      { cols: 1, rows: 2, y: 1, x: 0, label: 'widget 4' },
-      { cols: 1, rows: 2, y: 1, x: 0, label: 'widget 5' },
       {
+        id: 2,
+        cols: 1,
+        rows: 2,
+        y: 0,
+        x: 1,
+        label: 'widget 2',
+        info: 'details of widget2',
+      },
+      {
+        id: 3,
+        cols: 1,
+        rows: 2,
+        y: 2,
+        x: 5,
+        label: 'widget 3',
+        info: 'details of widget3',
+      },
+      {
+        id: 4,
+        cols: 1,
+        rows: 2,
+        y: 1,
+        x: 0,
+        label: 'widget 4',
+        info: 'details of widget4',
+      },
+      {
+        id: 5,
+        cols: 1,
+        rows: 2,
+        y: 1,
+        x: 0,
+        label: 'widget 5',
+        info: 'details of widget5',
+      },
+      {
+        id: 6,
         cols: 2,
         rows: 2,
         y: 3,
@@ -90,6 +158,7 @@ export class GridsterpageComponent {
         info: 'Min rows & cols = 2',
       },
       {
+        id: 7,
         cols: 2,
         rows: 2,
         y: 2,
@@ -100,6 +169,7 @@ export class GridsterpageComponent {
         infro: 'Max rows & cols = 2',
       },
       {
+        id: 8,
         cols: 2,
         rows: 1,
         y: 2,
@@ -110,17 +180,25 @@ export class GridsterpageComponent {
         info: 'Drag&Resize Enabled',
       },
       {
+        id: 9,
         cols: 1,
         rows: 1,
         y: 2,
         x: 4,
         dragEnabled: false,
         resizeEnabled: false,
-
         label: 'widget 7',
         info: 'Drag&Resize Disabled',
       },
-      { cols: 1, rows: 1, y: 2, x: 6 },
+      {
+        id: 10,
+        cols: 1,
+        rows: 1,
+        y: 2,
+        x: 6,
+        label: 'widget 9',
+        info: 'Widget 9 is the last child of the ',
+      },
     ];
   }
 
@@ -137,19 +215,56 @@ export class GridsterpageComponent {
     this.dashboard.splice(this.dashboard.indexOf(item), 1);
   }
 
-  addItem(): void {
-    debugger;
-    let widgetObject = {
-      x: 0,
-      y: 0,
-      cols: 2,
-      rows: 2,
-      label: this.widgetLabel,
-      info: this.widgetInfo,
-    };
-    this.dashboard.push(widgetObject);
-    this.widgetInfo = '';
-    this.widgetLabel = '';
+  addWidget(): void {
+    if (this.widgetForm.valid) {
+      console.log('Form Submitted:', this.widgetForm.value.widgetLabel);
+      let index = this.dashboard.findIndex(
+        (item) => item['label'] === this.widgetForm.value.widgetLabel
+      );
+      if (index === -1) {
+        this.dashboard.push({
+          x: 0,
+          y: 0,
+          cols: 2,
+          rows: 2,
+          label: this.widgetForm.value.widgetLabel,
+          info: this.widgetForm.value.widgetInfo,
+        });
+        this.visible = false;
+      } else {
+        let editedWidget = this.dashboard[index];
+        editedWidget['info'] = this.widgetForm.value.widgetInfo;
+        this.dashboard.splice(index, 1, editedWidget);
+        this.visible = false;
+      }
+    } else {
+      console.log('Form is invalid');
+    }
+  }
+  editWidget(widgetDetail) {
+    this.widgetForm.patchValue({
+      widgetLabel: widgetDetail.label,
+      widgetInfo: widgetDetail.info,
+    });
+    this.visible = true;
+  }
+
+  cancel() {
+    this.widgetForm.reset();
     this.visible = false;
+  }
+  resized(event) {
+    console.log(event.item['id']);
+    if (event.item['id'] === 1) {
+      // console.log(event.itemComponent.height);
+      this.chartHeight = `${event.itemComponent.height / 1.1}px`;
+      // console.log(this.chartHeight);
+      this.chartWidth = `${event.itemComponent.width / 2.8}px`;
+      let chart = document.getElementById('chart');
+      chart.children[0]['style']['height'] = `${
+        event.itemComponent.height / 1.5
+      }px`;
+    }
+    // console.log(chart.children[0]['style']['height']);
   }
 }

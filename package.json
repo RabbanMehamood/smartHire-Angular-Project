@@ -24,6 +24,7 @@
     "angular-gridster2": "^17.0.0",
     "chart.js": "^4.5.0",
     "font-awesome": "^4.7.0",
+    "mermaid": "^10.9.0",
     "orgchart": "^5.0.0",
     "orgchart.js": "^0.0.4",
     "primeflex": "^3.3.1",

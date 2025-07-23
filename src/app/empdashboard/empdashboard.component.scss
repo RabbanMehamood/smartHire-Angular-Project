@@ -18,3 +18,11 @@
     #f0d3d5 100%
   );
 }
+
+::ng-deep .p-tree {
+  border: 1px solid #e5e7eb;
+  background: #c8b08e !important;
+  color: #4b5563;
+  padding: 1.25rem;
+  border-radius: 6px;
+}

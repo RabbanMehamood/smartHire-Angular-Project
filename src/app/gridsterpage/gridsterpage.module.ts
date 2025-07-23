@@ -10,6 +10,7 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { ChartModule } from 'primeng/chart';
 import { DialogModule } from 'primeng/dialog';
 
+    import { ReactiveFormsModule } from '@angular/forms'; 
 
 
 import { GridsterpageRoutingModule } from './gridsterpage-routing.module';
@@ -32,8 +33,8 @@ import { SharedModule } from '../shared/shared.module';
     InputTextModule,
     InputNumberModule,
     ChartModule,
+    ReactiveFormsModule,
     DialogModule,
-    
   ],
 })
 export class GridsterpageModule {}
