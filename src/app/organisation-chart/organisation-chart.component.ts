@@ -5,7 +5,7 @@ import {
   ViewChild,
   viewChild,
 } from '@angular/core';
-import OrgChart from 'orgchart.js/src/orgchart.js';
+import OrgChart from 'orgchart.js';
 import { subscribeOn } from 'rxjs';
 
 @Component({

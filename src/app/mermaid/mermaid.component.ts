@@ -36,7 +36,7 @@ export class MermaidComponent implements AfterViewInit {
       .then(({ svg, bindFunctions }) => {
         container.innerHTML = svg;
         if (typeof bindFunctions === 'function') {
-          bindFunctions(container); // Bind click events etc.
+          bindFunctions(container);
         }
       });
   }
